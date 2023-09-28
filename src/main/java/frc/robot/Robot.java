@@ -124,8 +124,6 @@ public class Robot extends LoggedRobot {
       m_doneAuto = true;
       m_autoTimer.stop();
       m_autonomousCommand.cancel();
-      m_robotContainer.endAutoScore();
-      System.out.println("DOIAHWDUAWHD \n\n\n\n\nDAKHGAWHDKAWDAW\n\n\n\n\n\n DAJWHDDAD");
     }
   }
 
@@ -145,7 +143,7 @@ public class Robot extends LoggedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    SmartDashboard.putString("GamePiece", GameState.getInstance().getGamePieceDesired().name());
+    
   }
 
   @Override
