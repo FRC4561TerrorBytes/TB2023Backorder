@@ -7,18 +7,15 @@ package frc.robot;
 import java.util.function.Supplier;
 
 import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.wpilibj.XboxController.Axis;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
-import edu.wpi.first.wpilibj2.command.ScheduleCommand;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.ScoreAlign;
-import frc.robot.commands.autonomous.BalanceAuto;
+import frc.robot.commands.autonomous.BasePathAuto;
 import frc.robot.commands.autonomous.DriveUntilCommand;
 import frc.robot.subsystems.DriveSubsystem;
 
@@ -48,13 +45,14 @@ public class RobotContainer {
     m_driveSubsystem.setDefaultCommand(new RunCommand(() -> m_driveSubsystem.drive(
         modifyAxis(m_primaryController.getLeftY()) * Constants.MAX_VELOCITY_METERS_PER_SECOND,
         modifyAxis(m_primaryController.getLeftX()) * Constants.MAX_VELOCITY_METERS_PER_SECOND,
-        modifyAxis(m_primaryController.getRightX())
-            * Constants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND * 0.6,
+        modifyAxis(m_primaryController.getRightX()) * Constants.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND,
         true),
         m_driveSubsystem));
 
     m_autoChooser.setDefaultOption("Do Nothing", () -> new DriveUntilCommand(m_driveSubsystem, 0.0, 0.0, () -> true));
     
+    m_autoChooser.addOption("SQUARE", () -> new BasePathAuto(m_driveSubsystem, "SQUARE", 2, 2).getCommandAndStop());
+
     SmartDashboard.putData("Auto Chooser", m_autoChooser);
 
     // Configure the trigger bindings
@@ -139,6 +137,6 @@ public class RobotContainer {
     // Square the axis
     value = Math.copySign(value * value, value);
 
-    return value * 0.8;
+    return value * 0.75;
   }
 }
