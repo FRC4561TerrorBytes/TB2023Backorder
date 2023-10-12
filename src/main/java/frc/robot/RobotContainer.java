@@ -18,6 +18,7 @@ import frc.robot.commands.ScoreAlign;
 import frc.robot.commands.autonomous.BasePathAuto;
 import frc.robot.commands.autonomous.DriveUntilCommand;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.VisionSubsytem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -31,6 +32,7 @@ import frc.robot.subsystems.DriveSubsystem;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
+  private final VisionSubsytem m_visionSubsystem = new VisionSubsytem(m_driveSubsystem);
 
   private final SendableChooser<Supplier<Command>> m_autoChooser = new SendableChooser<>();
   private boolean isAuto;
@@ -102,6 +104,9 @@ public class RobotContainer {
     m_primaryController.x()
       .whileTrue(new ScoreAlign(m_driveSubsystem));
       // .onFalse(new InstantCommand(() -> m_driveSubsystem.stop()));
+
+    m_primaryController.a()
+      .whileTrue(m_visionSubsystem.centerAprilTagCommand(0, 0));
   }
 
   public void changeAutoTrigger(boolean inAuto) {
