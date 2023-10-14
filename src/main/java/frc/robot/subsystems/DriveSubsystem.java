@@ -85,7 +85,7 @@ public class DriveSubsystem extends SubsystemBase {
     m_poseEstimator = new SwerveDrivePoseEstimator(Constants.DRIVE_KINEMATICS,
       getRotation2d(),
       getModulePositions(),
-      new Pose2d(),
+      new Pose2d(0, 0, Rotation2d.fromDegrees(m_pigeon.getYaw())),
       VecBuilder.fill(0.05, 0.05, Units.degreesToRadians(5)),
       VecBuilder.fill(0.5, 0.5, Units.degreesToRadians(30)));
   }

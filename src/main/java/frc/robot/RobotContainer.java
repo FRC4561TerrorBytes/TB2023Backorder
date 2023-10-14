@@ -55,6 +55,8 @@ public class RobotContainer {
     
     m_autoChooser.addOption("SQUARE", () -> new BasePathAuto(m_driveSubsystem, "SQUARE", 2, 2).getCommandAndStop());
 
+    m_autoChooser.addOption("DriveBack", () -> new BasePathAuto(m_driveSubsystem, "DriveBack", 1, 1).getCommandAndStop());
+
     SmartDashboard.putData("Auto Chooser", m_autoChooser);
 
     // Configure the trigger bindings
