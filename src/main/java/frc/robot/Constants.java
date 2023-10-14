@@ -200,7 +200,7 @@ public final class Constants {
   public static final double AUTO_Y_KI = 0.0;
   public static final double AUTO_Y_KD = 0.0;
 
-  public static final double AUTO_THETA_KP = 0.25;
+  public static final double AUTO_THETA_KP = 0.125;
   public static final double AUTO_THETA_KI = 0.0;
   public static final double AUTO_THETA_KD = 0.0;
 

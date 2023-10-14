@@ -106,7 +106,7 @@ public class RobotContainer {
       // .onFalse(new InstantCommand(() -> m_driveSubsystem.stop()));
 
     m_primaryController.a()
-      .whileTrue(m_visionSubsystem.centerAprilTagCommand(0, 0));
+      .whileTrue(m_visionSubsystem.centerAprilTagCommand(0));
   }
 
   public void changeAutoTrigger(boolean inAuto) {

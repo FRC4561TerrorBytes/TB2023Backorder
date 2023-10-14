@@ -17,14 +17,11 @@ import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.PathPoint;
 
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
-import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.apriltag.AprilTagFieldLayout.OriginPosition;
-import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
@@ -32,7 +29,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 import frc.robot.LimelightHelpers;
 import frc.robot.LimelightHelpers.LimelightResults;
 import frc.robot.LimelightHelpers.LimelightTarget_Fiducial;
@@ -123,11 +119,11 @@ public class VisionSubsytem extends SubsystemBase {
     return (total / list.size());
   }
 
-  public Command centerAprilTagCommand(final double aprilTagOffset, final double backOffset) {
-    return new CenterAprilTag(aprilTagOffset, backOffset);
+  public Command centerAprilTagCommand(final double backOffset) {
+    return new CenterAprilTag(backOffset);
   }
 
-  private void centerApriltag(final double aprilTagOffset, final double backOffset) {
+  private void centerApriltag(final double backOffset) {
     LimelightResults leftResult = LimelightHelpers.getLatestResults("limelight-right");
 
     var leftClosestTag = getClosestTag("limelight-right");
@@ -169,7 +165,6 @@ public class VisionSubsytem extends SubsystemBase {
 
     if (leftTargetIDValid) {
       targetPose = leftAprilTransform3d;
-      cameraOffset = Constants.LEFT_CAMERA_OFFSET_RIGHT - aprilTagOffset;
     } else {
       targetPose = null;
     }
@@ -179,8 +174,8 @@ public class VisionSubsytem extends SubsystemBase {
       
       PathPlannerTrajectory traj = PathPlanner.generatePath(
         new PathConstraints(1, 1),
-        new PathPoint(m_driveSubsytem.getTranslation2d(), Rotation2d.fromDegrees(-90), m_driveSubsytem.getRotation2d()),
-        new PathPoint(m_driveSubsytem.getTranslation2d().minus(new Translation2d(0.5, 0.5)), Rotation2d.fromDegrees(-90), m_driveSubsytem.getRotation2d()));
+        new PathPoint(m_driveSubsytem.getTranslation2d(), Rotation2d.fromDegrees(0), m_driveSubsytem.getRotation2d()),
+        new PathPoint(targetTransform, Rotation2d.fromDegrees(0), m_driveSubsytem.getRotation2d()));
 
       m_field.getObject("traj").setTrajectory(traj);
 
@@ -210,11 +205,9 @@ public class VisionSubsytem extends SubsystemBase {
   }
 
   private class CenterAprilTag extends CommandBase {
-    private final double m_aprilTagOffset;
     private final double m_backOffset;
 
-    private CenterAprilTag(final double aprilTagOffset, final double backOffset) {
-      m_aprilTagOffset = aprilTagOffset;
+    private CenterAprilTag(final double backOffset) {
       m_backOffset = backOffset;
       addRequirements(m_driveSubsytem);
     }
@@ -231,7 +224,7 @@ public class VisionSubsytem extends SubsystemBase {
 
     @Override
     public void execute() {
-      centerApriltag(m_aprilTagOffset, m_backOffset);
+      centerApriltag(m_backOffset);
       // SmartDashboard.putBoolean("driving", true);
     }
 

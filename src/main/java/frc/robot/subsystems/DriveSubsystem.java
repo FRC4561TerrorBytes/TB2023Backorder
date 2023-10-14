@@ -81,7 +81,7 @@ public class DriveSubsystem extends SubsystemBase {
         Constants.AUTO_THETA_KD);
 
   public DriveSubsystem() {
-    m_pigeon.setYaw(0.0);
+    m_pigeon.setYaw(180.0);
     m_poseEstimator = new SwerveDrivePoseEstimator(Constants.DRIVE_KINEMATICS,
       getRotation2d(),
       getModulePositions(),
