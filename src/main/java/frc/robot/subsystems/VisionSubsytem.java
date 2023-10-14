@@ -174,8 +174,8 @@ public class VisionSubsytem extends SubsystemBase {
       
       PathPlannerTrajectory traj = PathPlanner.generatePath(
         new PathConstraints(1, 1),
-        new PathPoint(m_driveSubsytem.getTranslation2d(), Rotation2d.fromDegrees(0), m_driveSubsytem.getRotation2d()),
-        new PathPoint(targetTransform, Rotation2d.fromDegrees(0), m_driveSubsytem.getRotation2d()));
+        new PathPoint(m_driveSubsytem.getTranslation2d(), Rotation2d.fromDegrees(180), m_driveSubsytem.getRotation2d()),
+        new PathPoint(targetTransform, Rotation2d.fromDegrees(180), Rotation2d.fromDegrees(0)));
 
       m_field.getObject("traj").setTrajectory(traj);
 
