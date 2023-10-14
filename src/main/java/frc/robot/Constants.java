@@ -192,15 +192,15 @@ public final class Constants {
   public static final double SCORE_SPEED_CONE = -0.35;
   public static final double SCORE_SPEED_CUBE = -0.25;
 
-  public static final double AUTO_X_KP = 1.0;
+  public static final double AUTO_X_KP = 0.5;
   public static final double AUTO_X_KI = 0.0;
   public static final double AUTO_X_KD = 0.0;
 
-  public static final double AUTO_Y_KP = 1.0;
+  public static final double AUTO_Y_KP = 0.5;
   public static final double AUTO_Y_KI = 0.0;
   public static final double AUTO_Y_KD = 0.0;
 
-  public static final double AUTO_THETA_KP = 1.0;
+  public static final double AUTO_THETA_KP = 0.25;
   public static final double AUTO_THETA_KI = 0.0;
   public static final double AUTO_THETA_KD = 0.0;
 

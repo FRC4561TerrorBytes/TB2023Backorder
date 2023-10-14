@@ -179,15 +179,15 @@ public class VisionSubsytem extends SubsystemBase {
       
       PathPlannerTrajectory traj = PathPlanner.generatePath(
         new PathConstraints(1, 1),
-        new PathPoint(m_driveSubsytem.getTranslation2d(), m_driveSubsytem.getRotation2d()),
-        new PathPoint(m_driveSubsytem.getTranslation2d().minus(new Translation2d(1, 1)), m_driveSubsytem.getRotation2d()));
+        new PathPoint(m_driveSubsytem.getTranslation2d(), Rotation2d.fromDegrees(-90), m_driveSubsytem.getRotation2d()),
+        new PathPoint(m_driveSubsytem.getTranslation2d().minus(new Translation2d(0.5, 0.5)), Rotation2d.fromDegrees(-90), m_driveSubsytem.getRotation2d()));
 
       m_field.getObject("traj").setTrajectory(traj);
 
       Logger.getInstance().recordOutput("Desired X", targetTransform.getX());
       Logger.getInstance().recordOutput("Desired Y", targetTransform.getY());
 
-      m_driveSubsytem.followTrajectoryCommand(traj, false);
+      m_driveSubsytem.followTrajectoryCommand(traj, false).schedule();
 
     } else {
       lostTargetDebounceCount++;
