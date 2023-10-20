@@ -34,15 +34,19 @@ public class ArmSubsytem extends SubsystemBase {
     m_shooterMotor.restoreFactoryDefaults();
     m_shooterMotor.setIdleMode(IdleMode.kBrake);
     m_shooterEncoder = m_shooterMotor.getEncoder();
-    m_shooterController = m_shooterMotor.getPIDController();
     m_shooterEncoder.setPosition(0);
+    m_shooterController = m_shooterMotor.getPIDController();
+    m_shooterController.setFF(Constants.SHOOTER_MAX_VOLTAGE_FF);
+    m_shooterController.setP(Constants.SHOOTER_PROPORTIONAL_GAIN, 0);
+    m_shooterController.setI(Constants.SHOOTER_INTEGRAL_GAIN, 0);
+    m_shooterController.setD(Constants.SHOOTER_DERIVATIVE_GAIN, 0);
   }
 
   public void proceedToShooterPosition(){
     double currentDegrees = m_shooterEncoder.getPosition();
     double cosineScalar = Math.cos(Math.toRadians(currentDegrees));
     m_shooterController.setReference(
-      m_targetShooterPosition, ControlType.kPosition, 1,
+      m_targetShooterPosition, ControlType.kPosition, 0,
       Constants.SHOOTER_MAX_VOLTAGE_FF * cosineScalar, ArbFFUnits.kVoltage);
   }
 

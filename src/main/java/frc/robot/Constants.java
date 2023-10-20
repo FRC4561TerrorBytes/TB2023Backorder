@@ -146,9 +146,9 @@ public final class Constants {
   public static final int SHOOTER_MOTOR = 1;
 
   public static final double SHOOTER_ROTATIONS_PER_DEGREE = 225.0 / 360.0; //NEEDS TO BE CALCULATED
-  public static final double SHOOTER_MAX_VOLTAGE_FF = 2.0; //NEEDS TO BE CALCULATED
-  public static final double SHOOTER_PROPORTIONAL_GAIN_SLOT_0 = 0; //NEEDS TO BE CALCULATED
-  public static final double SHOOTER_DERIVATIVE_GAIN_SLOT_0 = 0; //NEEDS TO BE CALCULATED
+  public static final double SHOOTER_MAX_VOLTAGE_FF = 0.38;
+  public static final double SHOOTER_PROPORTIONAL_GAIN = 0; //NEEDS TO BE CALCULATED
+  public static final double SHOOTER_DERIVATIVE_GAIN = 0; //NEEDS TO BE CALCULATED
   public static final double SHOOTER_INTEGRAL_GAIN = 0; //NEEDS TO BE CALCULATED
   public static final double SHOOTER_IZONE = 0; //NEEDS TO BE CALCULATED
   public static final double SHOOTER_TOLERANCE = SHOOTER_ROTATIONS_PER_DEGREE / 2.0; //NEEDS TO BE CALCULATED
