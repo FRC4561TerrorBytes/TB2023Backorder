@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.ScoreAlign;
+import frc.robot.commands.autonomous.BalanceAuto;
 import frc.robot.commands.autonomous.BasePathAuto;
 import frc.robot.commands.autonomous.DriveUntilCommand;
 import frc.robot.subsystems.DriveSubsystem;
@@ -52,6 +53,9 @@ public class RobotContainer {
     m_autoChooser.setDefaultOption("Do Nothing", () -> new DriveUntilCommand(m_driveSubsystem, 0.0, 0.0, () -> true));
     
     m_autoChooser.addOption("SQUARE", () -> new BasePathAuto(m_driveSubsystem, "SQUARE", 2, 2).getCommandAndStop());
+    m_autoChooser.addOption("Balance", () -> new BalanceAuto(m_driveSubsystem, 2, 1, -1));
+    m_autoChooser.addOption("LeaveRight", () -> new DriveUntilCommand(m_driveSubsystem, -1, 0.1, () -> false).withTimeout(5));
+    m_autoChooser.addOption("LeaveLeft", () -> new DriveUntilCommand(m_driveSubsystem, -1, -0.1, () -> false).withTimeout(5));
 
     SmartDashboard.putData("Auto Chooser", m_autoChooser);
 
